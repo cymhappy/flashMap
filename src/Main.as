@@ -28,7 +28,8 @@ package
 		
 		/**tip层**/
 		private var tipLayer:Sprite;
-		
+		/**内容层,地图放这个层**/
+		private var contentLayer:Sprite;
 		
 		
 		public function Main():void 
@@ -42,15 +43,18 @@ package
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 			// entry point
 			
-			var tooTips:ToolTips = new ToolTips();
-			tooTips.addGlobalListener(toolTipsForward);
+			/**tips**/
+			tipLayer = new Sprite();			
+			ToolTips.getInstance().addGlobalListener(toolTipsForward);
+			ToolTips.getInstance().setup(tipLayer);
 			
-			
+			/**地图**/
+			contentLayer = new Sprite();
 			chinaMap = new china() as Sprite;			
 			chinaMap.scaleX = 1.7;
-			chinaMap.scaleY = 1.7;
+			chinaMap.scaleY = 1.7;			
+			contentLayer.addChild(chinaMap);
 			
-			addChild(chinaMap);
 			
 			for each (var item:String in nameArr) 
 			{
@@ -58,10 +62,15 @@ package
 			}
 
 			
+			addChild(contentLayer);
+			addChild(tipLayer);
 		}
-		
+		/**
+		 * tips事件
+		 * @param	e
+		 */
 		private function toolTipsForward(e:Event):void {
-			
+			trace("tooltips发送事件!");
 		}
 		
 
