@@ -1,5 +1,6 @@
 package view 
 {
+	import flash.display.MovieClip;
 	import flash.display.Shape;
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
@@ -16,6 +17,11 @@ package view
 		private var shape:Shape;
 		/**行省的名字**/
 		private var _name:String;
+		
+		[Embed(source="../../map/shanshuo/ss.swf", symbol="com.xinshiyun.flashMap.shanshuo")]
+		private var ssClass:Class;
+		
+		private var shanshuo:MovieClip;
 		
 		
 		public function Province($map:Sprite) 
@@ -35,6 +41,8 @@ package view
 			_name = map.name;
 			
 			trace(_name);
+			
+			map.addChild(shanshuo = new ssClass() as MovieClip);
 			
 		}
 		/**
